@@ -7,12 +7,15 @@ import com.forhadmethun.simplesearchapplication.programminglanguage.ProgrammingL
 import com.forhadmethun.simplesearchapplication.programminglanguage.ProgrammingLanguageRepository;
 import com.forhadmethun.simplesearchapplication.test.BookingRepository;
 import com.forhadmethun.simplesearchapplication.test.HotelBookingEntity;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.web.bind.annotation.*;
+import sun.awt.image.ImageWatched;
 
 import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
@@ -137,7 +140,39 @@ public class RESTController {
 
     @RequestMapping(value="/searchall",method = RequestMethod.GET)
     public  List<Table> searchall(){
-        List<Object[]> rows = dao.searchByProgrammingLanguage("");
+        List<Object[]> rows = dao.search("","","");
+//        System.out.println("==========");
+//        return programmingLanguageRepository.findAll();
+        List<Table> tables = new ArrayList<>();
+        for(Object[] row: rows){
+            Table table = new Table();
+//str!=null && str.equals("hi") (String)
+            table.setEmail(row[1]!=null?(String)row[1]:"");
+            BigInteger bigInteger = (BigInteger)row[0];
+            table.setUserId(bigInteger.longValue());
+//            table.setUserId((Long) row[0]!=null?(Long)row[0]:-1);
+            table.setLanguage((String) row[2]!=null?(String)row[2]:"");
+            table.setProgrammingLanguage((String) row[3]!=null?(String)row[3]:"");
+            tables.add(table);
+
+        }
+        return tables;
+    }
+
+    @RequestMapping(value="/searchalldata",method = RequestMethod.POST)
+    public  List<Table> searchallData(@RequestBody JSONObject data){
+
+        System.out.println(data);
+        LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
+        System.out.println(linkedHashMap);
+
+        String name = linkedHashMap.get("name");
+        String email = linkedHashMap.get("email");
+        String code = linkedHashMap.get("code");
+
+
+
+        List<Object[]> rows = dao.search(name ,code,email);
 //        System.out.println("==========");
 //        return programmingLanguageRepository.findAll();
         List<Table> tables = new ArrayList<>();

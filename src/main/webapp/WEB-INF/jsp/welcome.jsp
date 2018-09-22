@@ -11,6 +11,10 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+
+
 </head>
 <body>
 <div id="app" style="visibility: hidden">
@@ -63,6 +67,9 @@
                             hide-details
                             label="Enter Email Address"
                             solo-inverted
+                            @click="updateSeek($event)"
+                            clearable
+
                     ></v-autocomplete>
                     <v-btn icon>
                         <v-icon>more_vert</v-icon>
@@ -112,6 +119,20 @@
                         <v-icon>more_vert</v-icon>
                     </v-btn>
                 </v-toolbar>
+                <v-card>
+
+                    <%--<div>--%>
+                        <%--<label class="typo__label">Simple select / dropdown</label>--%>
+                        <%--<multiselect v-model="value" :options="options" :multiple="false" :close-on-select="false" :clear-on-select="false" :hide-selected="true" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">--%>
+                            <%--<template slot="tag" slot-scope="props"><span class="custom__tag"><span>{{ props.option.language }}</span><span class="custom__remove" @click="props.remove(props.option)">x</span></span></template>--%>
+                        <%--</multiselect>--%>
+                        <%--<pre class="language-json"><code>{{ value  }}</code></pre>--%>
+                    <%--</div>--%>
+
+
+                </v-card>
+
+
                 <v-card>
                     <v-card-title>
                         <%--Nutrition--%>
@@ -173,9 +194,14 @@
 <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
 <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+
 <script>
     new Vue({
         el: '#app',
+        components: {
+            Multiselect: window.VueMultiselect.default
+        },
         data: {
             drawer: null,
             search: '',
@@ -357,13 +383,28 @@
             languages:[],
             tableItems:[],
 
+
+            value: [],
+            options: [
+                { name: 'Vue.js', language: 'JavaScript' },
+                { name: 'Adonis', language: 'JavaScript' },
+                { name: 'Rails', language: 'Ruby' },
+                { name: 'Sinatra', language: 'Ruby' },
+                { name: 'Laravel', language: 'PHP' },
+                { name: 'Phoenix', language: 'Elixir' }
+            ],
+
+
+
+
         },
         watch: {
             searchEmail (val) {
                 val && val !== this.select && this.querySelectionsSearchEmail(val)
             },
             searchProgrammingLanguage (val) {
-                val && val !== this.select && this.querySelectionsSearchProgrammingLanguage(val)
+                val && val !== this.select && this.querySelectionsSearchProgrammingLanguage(val);
+
             } ,
             searchLanguage (val) {
                 val && val !== this.select && this.querySelectionsSearchLanguage(val)
@@ -399,6 +440,10 @@
                         console.log(this.programmingLanguages);
                         console.log("==end==");
                         // document.getElementById('app').style.visibility = 'visible';
+                        this.searchAll();
+
+
+
                     })
                     .catch(function (error) {
                         // handle error
@@ -406,6 +451,9 @@
                     })
                     .then(function () {
                         // always executed
+
+                       // alert('come');
+
                     });
 
 
@@ -414,7 +462,8 @@
                         return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                     });
                     this.plloading = false
-                }, 500)
+                }, 500);
+
             },
             querySelectionsSearchLanguage (v) {
                 this.lloading = true;
@@ -434,6 +483,7 @@
                         console.log(this.programmingLanguages);
                         console.log("==end==");
                         // document.getElementById('app').style.visibility = 'visible';
+                        this.searchAll();
                     })
                     .catch(function (error) {
                         // handle error
@@ -469,6 +519,7 @@
                         console.log(this.programmingLanguages);
                         console.log("==end==");
                         // document.getElementById('app').style.visibility = 'visible';
+                        this.searchAll();
                     })
                     .catch(function (error) {
                         // handle error
@@ -486,6 +537,74 @@
                     this.eloading = false
                 }, 500)
             },
+            updateSeek(event){
+                // alert('called update');
+            },
+            nameWithLang ({ name, language }) {
+                return `${name} — [${language}]`
+            }, searchAll(){
+                console.log('!!searchall called!!');
+                var data = {
+                    "email" : this.selectEmail,
+                    "code" : this.selectLanguage,
+                    "name" : this.selectProgrammingLanguage
+                };
+                console.log(JSON.stringify(data));
+
+                var url1 = "workordergenerate";
+                axios.post('/searchalldata', {data})
+                    .then(result => {
+                        // alert('data from searchalldata!!');
+                        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                        console.log(result.data);
+                        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                        this.tableItems = result.data;
+
+
+                    })
+                    .catch(function (error) {
+                    });
+            },
+
+        },
+        updated: function () {
+            this.$nextTick(function () {
+                // Code that will run only after the
+                // entire view has been re-rendered
+                // alert('called sometimes, - udated');
+                //
+                // if(this.selectProgrammingLanguage == this.searchProgrammingLanguage && this.selectProgrammingLanguage!=null ||
+                // this.selectEmail == this.searchEmail && this.selectEmail != null ||
+                // this.selectLanguage == this.searchLanguage && this.selectLanguage !=null
+                // ){
+                //     console.log('^^^^^^^^ success all criteria ^^^^^^^^^^^^!');
+                //     // alert('sucess all criteria!');
+                //     axios.get('/searchpl/'+this.selectProgrammingLanguage)
+                //         .then( (response) =>{
+                //             // handle success
+                //             // alert('come here');
+                //             console.log(response);
+                //             // this.desserts = response.data;
+                //             this.tableItems = response.data;
+                //             console.log("======start======'\n");
+                //             console.log(this.desserts);
+                //             console.log("==end==");
+                //             // alert('table value updated!!!!!!!!!! ');
+                //             // document.getElementById('app').style.visibility = 'visible';
+                //         })
+                //         .catch(function (error) {
+                //             // handle error
+                //             console.log(error);
+                //         })
+                //         .then(function () {
+                //             // always executed
+                //         });
+                //
+                // }
+
+                // this.searchAll();
+
+            })
         },
 
 

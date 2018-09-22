@@ -62,6 +62,10 @@ public class ProgrammingLanguageEntity {
         this.name = name;
 //        this.developerId = developerId;
     }
+    public ProgrammingLanguageEntity(String name){
+        this.name = name;
+//        this.developerId = developerId;
+    }
 
 }
 

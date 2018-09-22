@@ -70,6 +70,12 @@ public class DeveloperEntity {
 //        this.languageId = languageId;
 //        this.programmingLanguageId = programmingLanguageId;
     }
+    public DeveloperEntity( String email){
+
+        this.email = email;
+//        this.languageId = languageId;
+//        this.programmingLanguageId = programmingLanguageId;
+    }
 
 
 
