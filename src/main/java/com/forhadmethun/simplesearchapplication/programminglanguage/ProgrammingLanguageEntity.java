@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "programming_languages")
 public class ProgrammingLanguageEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String name;
@@ -27,7 +27,7 @@ public class ProgrammingLanguageEntity {
 
 
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "programming_languages_developers",
             joinColumns = {@JoinColumn(name = "programming_languagesid")},

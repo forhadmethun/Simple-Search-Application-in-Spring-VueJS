@@ -1,6 +1,8 @@
 package com.forhadmethun.simplesearchapplication;
 import com.forhadmethun.simplesearchapplication.developer.DeveloperEntity;
 import com.forhadmethun.simplesearchapplication.developer.DeveloperRepository;
+import com.forhadmethun.simplesearchapplication.interview.InterviewEntity;
+import com.forhadmethun.simplesearchapplication.interview.InterviewRepository;
 import com.forhadmethun.simplesearchapplication.language.LanguageEntity;
 import com.forhadmethun.simplesearchapplication.language.LanguageRepository;
 import com.forhadmethun.simplesearchapplication.programminglanguage.ProgrammingLanguageEntity;
@@ -14,9 +16,7 @@ import sun.awt.image.ImageWatched;
 
 import java.lang.reflect.Array;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "")
@@ -31,6 +31,10 @@ public class RESTController {
 
     @Autowired
     private ProgrammingLanguageRepository programmingLanguageRepository;
+
+    @Autowired
+    private InterviewRepository interviewRepository;
+
 
     @Autowired
     private DAO dao;
@@ -137,6 +141,12 @@ public class RESTController {
     }
 
 
+    public class CustomComparator implements Comparator<Table> {
+        @Override
+        public int compare(Table o1, Table o2) {
+            return o1.getEmail().compareTo(o2.getEmail());
+        }
+    }
 
     @RequestMapping(value="/searchall",method = RequestMethod.GET)
     public  List<Table> searchall(){
@@ -156,7 +166,39 @@ public class RESTController {
             tables.add(table);
 
         }
-        return tables;
+
+
+
+
+
+        Collections.sort(tables,new CustomComparator());
+
+        ArrayList<Table> newtables = new ArrayList<>();
+        Table previousTable = tables.get(0);
+        newtables.add(previousTable);
+
+
+        for(int i=1;i<tables.size();i++){
+            Table t = tables.get(i);
+            if(t.getEmail().equals(previousTable.getEmail())){
+                if(previousTable.getLanguage().indexOf(t.getLanguage())==-1)previousTable.setLanguage(previousTable.getLanguage() + ", " + t.getLanguage());
+                if(previousTable.getProgrammingLanguage().indexOf(t.getProgrammingLanguage())==-1)previousTable.setProgrammingLanguage(previousTable.getProgrammingLanguage() + ", " + t.getProgrammingLanguage());
+//                tables.remove(t);
+                continue;
+            }
+            previousTable = t;
+            newtables.add(previousTable);
+            System.out.println(i + "--> " + t.toString());
+        }
+        System.out.println("==========");
+//        tables.remove(table);
+//        tables.remove(table);
+        for(Table t: newtables){
+            System.out.println("NEW-" + t.toString());
+        }
+
+
+        return newtables;
     }
 
     @RequestMapping(value="/searchalldata",method = RequestMethod.POST)
@@ -167,8 +209,7 @@ public class RESTController {
         System.out.println(linkedHashMap);
 
         String name = linkedHashMap.get("name");
-        String email = linkedHashMap.get("email");
-        String code = linkedHashMap.get("code");
+        String email = linkedHashMap.get("email");String code = linkedHashMap.get("code");
 
 
 
@@ -188,7 +229,41 @@ public class RESTController {
             tables.add(table);
 
         }
-        return tables;
+
+
+        Collections.sort(tables,new CustomComparator());
+
+        ArrayList<Table> newtables = new ArrayList<>();
+        Table previousTable = tables.get(0);
+        newtables.add(previousTable);
+
+
+        for(int i=1;i<tables.size();i++){
+            Table t = tables.get(i);
+            if(t.getEmail().equals(previousTable.getEmail())){
+                if(previousTable.getLanguage().indexOf(t.getLanguage())==-1)previousTable.setLanguage(previousTable.getLanguage() + ", " + t.getLanguage());
+                if(previousTable.getProgrammingLanguage().indexOf(t.getProgrammingLanguage())==-1)previousTable.setProgrammingLanguage(previousTable.getProgrammingLanguage() + ", " + t.getProgrammingLanguage());
+//                tables.remove(t);
+                continue;
+            }
+            previousTable = t;
+            newtables.add(previousTable);
+            System.out.println(i + "--> " + t.toString());
+        }
+        System.out.println("==========");
+//        tables.remove(table);
+//        tables.remove(table);
+        for(Table t: newtables){
+            System.out.println("NEW-" + t.toString());
+        }
+
+
+        return newtables;
+
+
+
+
+//        return tables;
     }
 
 
@@ -212,5 +287,54 @@ public class RESTController {
         bookingRepository.delete(bookingRepository.getOne(id));
         return bookingRepository.findAll();
     }
+
+
+    /*all api related to interview */
+
+    @RequestMapping(value="/createinterview", method=RequestMethod.POST)
+    public List<InterviewEntity> createinterview(@RequestBody JSONObject data){
+
+//        LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
+//        System.out.println(linkedHashMap);
+
+//        String id = linkedHashMap.get("id");
+        String name = (String)data.get("name");
+
+
+        interviewRepository.save(new InterviewEntity(name));
+        return interviewRepository.findAll();
+
+    }
+
+    @RequestMapping(value="/deleteinterview/{id}", method = RequestMethod.GET)
+    public List<InterviewEntity> deleteinterview(@PathVariable long id){
+        interviewRepository.delete(interviewRepository.getOne(id));
+        return interviewRepository.findAll();
+    }
+    @RequestMapping(value="/getinterview", method=RequestMethod.GET)
+    public List<InterviewEntity> getallinterview(){
+        return interviewRepository.findAll();
+    }
+    @RequestMapping(value="/updateinterview", method=RequestMethod.POST)
+    public List<InterviewEntity> updateinterview(@RequestBody JSONObject data){
+        LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
+//        System.out.println(linkedHashMap);
+
+        Integer intId = (Integer)data.get("id");// = Long.parseLong(linkedHashMap.get("id"));
+        long id = new Long(intId);
+        String name =(String) data.get("name");//  linkedHashMap.get("name");
+
+
+
+        InterviewEntity interviewEntity1 = interviewRepository.getOne(id);
+        interviewEntity1.setName(name);
+        interviewEntity1.setId(id);
+
+        interviewRepository.delete(id);
+        interviewRepository.save(interviewEntity1);
+        return interviewRepository.findAll();
+    }
+    /*end all api related to interview */
+
 
 }
