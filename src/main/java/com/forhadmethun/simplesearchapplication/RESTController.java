@@ -234,7 +234,8 @@ public class RESTController {
         Collections.sort(tables,new CustomComparator());
 
         ArrayList<Table> newtables = new ArrayList<>();
-        Table previousTable = tables.get(0);
+        Table previousTable =  new Table();
+        if(tables.size()>0)previousTable  = tables.get(0);
         newtables.add(previousTable);
 
 

@@ -90,7 +90,7 @@
                             flat
                             hide-no-data
                             hide-details
-                            label="Enter Programming Language(Ex: ruby, javascript, php etc.)"
+                            label="Enter Programming Language(Ex: C, JAVA, PHP, ruby etc.)"
                             solo-inverted
                     ></v-autocomplete>
                     <v-btn icon>
@@ -118,7 +118,10 @@
                     <v-btn icon>
                         <v-icon>more_vert</v-icon>
                     </v-btn>
+
                 </v-toolbar>
+                <v-btn slot="activator" color="primary" dark class="mb-2">All Item</v-btn>
+                <div class="v-toolbar__content" style="height: 64px;"><div class="v-toolbar__title"></div> <hr class="mx-2 v-divider v-divider--inset v-divider--vertical theme--light"> <div class="spacer"></div> <div class="v-dialog__container" style="display: inline-block;"><div class="v-dialog__activator"><button type="button" class="mb-2 v-btn theme--dark primary" style="position: relative;"><div @click="getAllData" class="v-btn__content">All Item</div></button></div></div></div>
                 <v-card>
 
                     <%--<div>--%>
@@ -534,14 +537,28 @@
         },
         watch: {
             searchEmail (val) {
-                val && val !== this.select && this.querySelectionsSearchEmail(val)
+
+                val && val !== this.select && this.querySelectionsSearchEmail(val);
+                if(!val){
+                    this.selectEmail = null;
+                    // alert('faka');
+                    this.searchAll();
+                }
             },
             searchProgrammingLanguage (val) {
                 val && val !== this.select && this.querySelectionsSearchProgrammingLanguage(val);
+                if(!val){
+                    this.selectProgrammingLanguage = null;
+                    this.searchAll();
+                }
 
             } ,
             searchLanguage (val) {
-                val && val !== this.select && this.querySelectionsSearchLanguage(val)
+                val && val !== this.select && this.querySelectionsSearchLanguage(val);
+                if(!val){
+                    this.selectLanguage = null;
+                    this.searchAll();
+                }
             },
             dialog (val) {
                 val || this.close()
@@ -650,12 +667,12 @@
                     .then( (response) =>{
                         // handle success
                         // alert('come here');
-                        console.log(response);
+                        // console.log(response);
                         // this.desserts = response.data;
                         this.emails = response.data;
-                        console.log("======start======'\n");
-                        console.log(this.programmingLanguages);
-                        console.log("==end==");
+                        // console.log("======start======'\n");
+                        // console.log(this.programmingLanguages);
+                        // console.log("==end==");
                         // document.getElementById('app').style.visibility = 'visible';
                         this.searchAll();
                     })
@@ -703,6 +720,7 @@
                     .catch(function (error) {
                     });
             },
+
 
         //    for crud -
             initialize () {
@@ -911,6 +929,29 @@
                 }
                 this.close()
             },
+
+            getAllData(){
+                axios.get('/searchall')
+                    .then( (response) =>{
+                        // handle success
+                        // alert('come here');
+                        console.log(response);
+                        // this.desserts = response.data;
+                        this.tableItems = response.data;
+                        console.log("======start======'\n");
+                        console.log(this.desserts);
+                        console.log("==end==");
+                        document.getElementById('app').style.visibility = 'visible';
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            }
+
 
 
         },
