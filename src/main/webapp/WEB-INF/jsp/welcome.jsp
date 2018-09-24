@@ -34,12 +34,12 @@
                     </v-list-tile-content>
                 </v-list-tile>
                 <%--<v-list-tile @click="">--%>
-                    <%--<v-list-tile-action>--%>
-                        <%--<v-icon>contact_mail</v-icon>--%>
-                    <%--</v-list-tile-action>--%>
-                    <%--&lt;%&ndash;<v-list-tile-content>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<v-list-tile-title>Admin</v-list-tile-title>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;</v-list-tile-content>&ndash;%&gt;--%>
+                <%--<v-list-tile-action>--%>
+                <%--<v-icon>contact_mail</v-icon>--%>
+                <%--</v-list-tile-action>--%>
+                <%--&lt;%&ndash;<v-list-tile-content>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<v-list-tile-title>Admin</v-list-tile-title>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</v-list-tile-content>&ndash;%&gt;--%>
                 <%--</v-list-tile>--%>
             </v-list>
         </v-navigation-drawer>
@@ -120,16 +120,31 @@
                     </v-btn>
 
                 </v-toolbar>
-                <v-btn slot="activator" color="primary" dark class="mb-2">All Item</v-btn>
-                <div class="v-toolbar__content" style="height: 64px;"><div class="v-toolbar__title"></div> <hr class="mx-2 v-divider v-divider--inset v-divider--vertical theme--light"> <div class="spacer"></div> <div class="v-dialog__container" style="display: inline-block;"><div class="v-dialog__activator"><button type="button" class="mb-2 v-btn theme--dark primary" style="position: relative;"><div @click="getAllData" class="v-btn__content">All Item</div></button></div></div></div>
+                <%--<v-btn slot="activator" color="primary" dark class="mb-2">All Item</v-btn>--%>
+                <div class="v-toolbar__content" style="height: 64px;">
+                    <div class="v-toolbar__title"></div>
+                    <hr class="mx-2 v-divider v-divider--inset v-divider--vertical theme--light">
+                    <div class="spacer"></div>
+                    <div class="v-dialog__container" style="display: inline-block;">
+                        <div class="v-dialog__activator">
+                            <button type="button" class="mb-2 v-btn theme--dark primary" style="position: relative;">
+                                <div @click="getAllpna" class="v-btn__content">All Programming Language Not used</div>
+                                <%--getAllProgrammingLanguageDataNotEnrolled--%>
+                            </button>
+                            <button type="button" class="mb-2 v-btn theme--dark primary" style="position: relative;">
+                                <div @click="getAllData" class="v-btn__content">All Item</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <v-card>
 
                     <%--<div>--%>
-                        <%--<label class="typo__label">Simple select / dropdown</label>--%>
-                        <%--<multiselect v-model="value" :options="options" :multiple="false" :close-on-select="false" :clear-on-select="false" :hide-selected="true" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">--%>
-                            <%--<template slot="tag" slot-scope="props"><span class="custom__tag"><span>{{ props.option.language }}</span><span class="custom__remove" @click="props.remove(props.option)">x</span></span></template>--%>
-                        <%--</multiselect>--%>
-                        <%--<pre class="language-json"><code>{{ value  }}</code></pre>--%>
+                    <%--<label class="typo__label">Simple select / dropdown</label>--%>
+                    <%--<multiselect v-model="value" :options="options" :multiple="false" :close-on-select="false" :clear-on-select="false" :hide-selected="true" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">--%>
+                    <%--<template slot="tag" slot-scope="props"><span class="custom__tag"><span>{{ props.option.language }}</span><span class="custom__remove" @click="props.remove(props.option)">x</span></span></template>--%>
+                    <%--</multiselect>--%>
+                    <%--<pre class="language-json"><code>{{ value  }}</code></pre>--%>
                     <%--</div>--%>
 
 
@@ -141,22 +156,21 @@
                         <%--Nutrition--%>
                         <%--<v-spacer></v-spacer>--%>
                         <%--<v-text-field--%>
-                                <%--v-model="search"--%>
-                                <%--append-icon="search"--%>
-                                <%--label="Search"--%>
-                                <%--single-line--%>
-                                <%--hide-details--%>
+                        <%--v-model="search"--%>
+                        <%--append-icon="search"--%>
+                        <%--label="Search"--%>
+                        <%--single-line--%>
+                        <%--hide-details--%>
                         <%--></v-text-field>--%>
 
 
-
-                            <%--<template slot="items" slot-scope="props">--%>
-                                <%--<td>{{ props.item.email }}</td>--%>
-                                <%--<td>{{ props.item.programmingLanguage--%>
-                                    <%--}}</td>--%>
-                                <%--<td>{{ props.item.language--%>
-                                    <%--}}</td>--%>
-                            <%--</template>--%>
+                        <%--<template slot="items" slot-scope="props">--%>
+                        <%--<td>{{ props.item.email }}</td>--%>
+                        <%--<td>{{ props.item.programmingLanguage--%>
+                        <%--}}</td>--%>
+                        <%--<td>{{ props.item.language--%>
+                        <%--}}</td>--%>
+                        <%--</template>--%>
 
 
                     </v-card-title>
@@ -166,17 +180,19 @@
                             :search="search"
                     >
                         <%--<template slot="items" slot-scope="props">--%>
-                            <%--<td>{{ props.item.name }}</td>--%>
-                            <%--<td>{{ props.item.calories }}</td>--%>
-                            <%--<td>{{ props.item.fat }}</td>--%>
+                        <%--<td>{{ props.item.name }}</td>--%>
+                        <%--<td>{{ props.item.calories }}</td>--%>
+                        <%--<td>{{ props.item.fat }}</td>--%>
                         <%--</template>--%>
 
                         <template slot="items" slot-scope="props">
-                        <td>{{ props.item.email }}</td>
-                        <td>{{ props.item.programmingLanguage
-                        }}</td>
-                        <td>{{ props.item.language
-                        }}</td>
+                            <td>{{ props.item.email }}</td>
+                            <td>{{ props.item.programmingLanguage
+                                }}
+                            </td>
+                            <td>{{ props.item.language
+                                }}
+                            </td>
                         </template>
 
                         <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -206,19 +222,20 @@
                                     <v-container grid-list-md>
                                         <v-layout wrap>
                                             <v-flex xs12 sm6 md4>
-                                                <v-text-field v-model="editedItem.name" label="Interview name"></v-text-field>
+                                                <v-text-field v-model="editedItem.name"
+                                                              label="Interview name"></v-text-field>
                                             </v-flex>
                                             <%--<v-flex xs12 sm6 md4>--%>
-                                                <%--<v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>--%>
+                                            <%--<v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>--%>
                                             <%--</v-flex>--%>
                                             <%--<v-flex xs12 sm6 md4>--%>
-                                                <%--<v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>--%>
+                                            <%--<v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>--%>
                                             <%--</v-flex>--%>
                                             <%--<v-flex xs12 sm6 md4>--%>
-                                                <%--<v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>--%>
+                                            <%--<v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>--%>
                                             <%--</v-flex>--%>
                                             <%--<v-flex xs12 sm6 md4>--%>
-                                                <%--<v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>--%>
+                                            <%--<v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>--%>
                                             <%--</v-flex>--%>
                                         </v-layout>
                                     </v-container>
@@ -267,19 +284,19 @@
                 </div>
 
                 <%--<v-card-text style="height: 100px;margin-top:60px; position: relative">--%>
-                    <%--<v-fab-transition>--%>
-                        <%--<v-btn--%>
-                                <%--v-show="!hidden"--%>
-                                <%--color="pink"--%>
-                                <%--dark--%>
-                                <%--absolute--%>
-                                <%--top--%>
-                                <%--right--%>
-                                <%--fab--%>
-                        <%-->--%>
-                            <%--<v-icon>add</v-icon>--%>
-                        <%--</v-btn>--%>
-                    <%--</v-fab-transition>--%>
+                <%--<v-fab-transition>--%>
+                <%--<v-btn--%>
+                <%--v-show="!hidden"--%>
+                <%--color="pink"--%>
+                <%--dark--%>
+                <%--absolute--%>
+                <%--top--%>
+                <%--right--%>
+                <%--fab--%>
+                <%-->--%>
+                <%--<v-icon>add</v-icon>--%>
+                <%--</v-btn>--%>
+                <%--</v-fab-transition>--%>
                 <%--</v-card-text>--%>
             </v-app>
 
@@ -480,26 +497,24 @@
                 'Wisconsin',
                 'Wyoming'
             ],
-            emails:[],
-            programmingLanguages:[],
-            languages:[],
-            tableItems:[],
+            emails: [],
+            programmingLanguages: [],
+            languages: [],
+            tableItems: [],
 
 
             value: [],
             options: [
-                { name: 'Vue.js', language: 'JavaScript' },
-                { name: 'Adonis', language: 'JavaScript' },
-                { name: 'Rails', language: 'Ruby' },
-                { name: 'Sinatra', language: 'Ruby' },
-                { name: 'Laravel', language: 'PHP' },
-                { name: 'Phoenix', language: 'Elixir' }
+                {name: 'Vue.js', language: 'JavaScript'},
+                {name: 'Adonis', language: 'JavaScript'},
+                {name: 'Rails', language: 'Ruby'},
+                {name: 'Sinatra', language: 'Ruby'},
+                {name: 'Laravel', language: 'PHP'},
+                {name: 'Phoenix', language: 'Elixir'}
             ],
 
 
-
-
-        //    added for crud operation
+            //    added for crud operation
             dialog: false,
             cheaders: [
                 {
@@ -532,71 +547,68 @@
             },
 
 
-
-
         },
         watch: {
-            searchEmail (val) {
+            searchEmail(val) {
 
                 val && val !== this.select && this.querySelectionsSearchEmail(val);
-                if(!val){
+                if (!val) {
                     this.selectEmail = null;
                     // alert('faka');
                     this.searchAll();
                 }
             },
-            searchProgrammingLanguage (val) {
+            searchProgrammingLanguage(val) {
                 val && val !== this.select && this.querySelectionsSearchProgrammingLanguage(val);
-                if(!val){
+                if (!val) {
                     this.selectProgrammingLanguage = null;
                     this.searchAll();
                 }
 
-            } ,
-            searchLanguage (val) {
+            },
+            searchLanguage(val) {
                 val && val !== this.select && this.querySelectionsSearchLanguage(val);
-                if(!val){
+                if (!val) {
                     this.selectLanguage = null;
                     this.searchAll();
                 }
             },
-            dialog (val) {
+            dialog(val) {
                 val || this.close()
             },
 
         },
         methods: {
-            querySelections (v) {
+            querySelections(v) {
                 this.loading = true;
                 // Simulated ajax query
-                 alert('val:'+v);
+                alert('val:' + v);
                 setTimeout(() => {
                     this.items = this.states.filter(e => {
-                    return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-            });
-                this.loading = false
-            }, 500)
+                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                    });
+                    this.loading = false
+                }, 500)
             },
-            querySelectionsSearchProgrammingLanguage (v) {
+            querySelectionsSearchProgrammingLanguage(v) {
                 this.plloading = true;
                 // Simulated ajax query
                 // alert('val:'+v);
                 // alert('serch prog');
 
 
-                axios.get('/getprogramminglanguagelist/'+v)
-                    .then( (response) =>{
+                axios.get('/getprogramminglanguagelist/' + v)
+                    .then((response) => {
                         // handle success
                         // alert('come here');
                         console.log(response);
                         // this.desserts = response.data;
                         this.programmingLanguages = response.data;
-                        console.log("======start======'\n");
-                        console.log(this.programmingLanguages);
-                        console.log("==end==");
+                        // console.log("======start======'\n");
+                        // console.log(this.programmingLanguages);
+                        // console.log("==end==");
                         // document.getElementById('app').style.visibility = 'visible';
                         this.searchAll();
-
 
 
                     })
@@ -607,36 +619,36 @@
                     .then(function () {
                         // always executed
 
-                       // alert('come');
+                        // alert('come');
 
                     });
 
 
                 setTimeout(() => {
-                    this.plitems= this.programmingLanguages.filter(e => {
+                    this.plitems = this.programmingLanguages.filter(e => {
                         return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                     });
                     this.plloading = false
                 }, 500);
 
             },
-            querySelectionsSearchLanguage (v) {
+            querySelectionsSearchLanguage(v) {
                 this.lloading = true;
                 // Simulated ajax query
                 // alert('val:'+v);
                 // alert('serch prog');
 
 
-                axios.get('/getlanguagelist/'+v)
-                    .then( (response) =>{
+                axios.get('/getlanguagelist/' + v)
+                    .then((response) => {
                         // handle success
                         // alert('come here');
                         console.log(response);
                         // this.desserts = response.data;
                         this.languages = response.data;
-                        console.log("======start======'\n");
-                        console.log(this.programmingLanguages);
-                        console.log("==end==");
+                        // console.log("======start======'\n");
+                        // console.log(this.programmingLanguages);
+                        // console.log("==end==");
                         // document.getElementById('app').style.visibility = 'visible';
                         this.searchAll();
                     })
@@ -663,8 +675,8 @@
                 // alert('serch prog');
 
 
-                axios.get('/getemaillist/'+v)
-                    .then( (response) =>{
+                axios.get('/getemaillist/' + v)
+                    .then((response) => {
                         // handle success
                         // alert('come here');
                         // console.log(response);
@@ -692,17 +704,17 @@
                     this.eloading = false
                 }, 500)
             },
-            updateSeek(event){
+            updateSeek(event) {
                 // alert('called update');
             },
-            nameWithLang ({ name, language }) {
+            nameWithLang({name, language}) {
                 return `${name} — [${language}]`
-            }, searchAll(){
+            }, searchAll() {
                 console.log('!!searchall called!!');
                 var data = {
-                    "email" : this.selectEmail,
-                    "code" : this.selectLanguage,
-                    "name" : this.selectProgrammingLanguage
+                    "email": this.selectEmail,
+                    "code": this.selectLanguage,
+                    "name": this.selectProgrammingLanguage
                 };
                 console.log(JSON.stringify(data));
 
@@ -722,8 +734,8 @@
             },
 
 
-        //    for crud -
-            initialize () {
+            //    for crud -
+            initialize() {
                 this.desserts = [
                     {
                         name: 'Frozen Yogurt',
@@ -798,7 +810,7 @@
                 ]
                 // alert('before get interview');
                 axios.get('/getinterview')
-                    .then( (response) =>{
+                    .then((response) => {
                         this.desserts = response.data;
                         console.log("======start interview data ======'\n");
                         console.log(this.desserts);
@@ -817,7 +829,7 @@
 
             },
 
-            editItem (item) {
+            editItem(item) {
                 this.editedIndex = this.desserts.indexOf(item);
                 this.editedItem = Object.assign({}, item);
 
@@ -838,21 +850,20 @@
                 //     });
 
 
-
                 this.dialog = true
             },
 
-            deleteItem (item) {
+            deleteItem(item) {
                 console.log('----------------- ITEM DELETE _-------------');
                 // console.log(item.id + ' --> ' + item.name);
                 // console.log('==============');
 
                 const index = this.desserts.indexOf(item);
-                if(confirm('Are you sure you want to delete this item?')){
+                if (confirm('Are you sure you want to delete this item?')) {
                     // this.desserts.splice(index, 1);
 
-                    axios.get('/deleteinterview/'+item.id)
-                        .then( (response) =>{
+                    axios.get('/deleteinterview/' + item.id)
+                        .then((response) => {
                             // handle success
                             // alert('come here');
                             // console.log(response);
@@ -874,11 +885,10 @@
                         });
 
 
-
                 }
             },
 
-            close () {
+            close() {
                 this.dialog = false;
                 setTimeout(() => {
                     this.editedItem = Object.assign({}, this.defaultItem)
@@ -886,7 +896,7 @@
                 }, 300)
             },
 
-            save () {
+            save() {
                 if (this.editedIndex > -1) {
                     //probably create item
                     // Object.assign(this.desserts[this.editedIndex], this.editedItem)
@@ -898,8 +908,8 @@
                     // console.log(JSON.stringify(data));
 
                     axios.post('/updateinterview', {
-                        "id" : this.editedItem.id,
-                        "name" : this.editedItem.name,
+                        "id": this.editedItem.id,
+                        "name": this.editedItem.name,
                     })
                         .then(result => {
                             this.initialize();
@@ -909,16 +919,15 @@
                         });
 
 
-
                 } else {
                     console.log('!! inter view add called!!');
                     var data = {
                         // "id" : item.id,
-                        "name" : this.editedItem,
+                        "name": this.editedItem,
                     };
                     console.log(JSON.stringify(data));
 
-                    axios.post('/createinterview', {"name" : this.editedItem.name})
+                    axios.post('/createinterview', {"name": this.editedItem.name})
                         .then(result => {
                             this.initialize();
 
@@ -930,9 +939,9 @@
                 this.close()
             },
 
-            getAllData(){
+            getAllData() {
                 axios.get('/searchall')
-                    .then( (response) =>{
+                    .then((response) => {
                         // handle success
                         // alert('come here');
                         console.log(response);
@@ -950,7 +959,29 @@
                     .then(function () {
                         // always executed
                     });
-            }
+            },
+            getAllpna() {
+                axios.get('/allpna')
+                    .then((response) => {
+                        // handle success
+                        // alert('come here');
+                        console.log(response);
+                        // this.desserts = response.data;
+                        this.tableItems = response.data;
+                        // console.log("======start======'\n");
+                        // console.log(this.desserts);
+                        // console.log("==end==");
+                        // document.getElementById('app').style.visibility = 'visible';
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });
+            },
+
 
 
 
@@ -995,20 +1026,19 @@
             })
         },
         computed: {
-            formTitle () {
+            formTitle() {
                 return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
             }
         },
-        created () {
+        created() {
             this.initialize()
         },
-
 
 
         mounted: function () {
             // $('#app').css('visibility','visible');
             axios.get('/searchall')
-                .then( (response) =>{
+                .then((response) => {
                     // handle success
                     // alert('come here');
                     console.log(response);
@@ -1026,7 +1056,6 @@
                 .then(function () {
                     // always executed
                 });
-
 
 
         }

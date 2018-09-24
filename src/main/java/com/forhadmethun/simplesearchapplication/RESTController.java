@@ -65,6 +65,37 @@ public class RESTController {
         return programmingLanguageRepository.findAll();
     }
 
+
+    @RequestMapping(value="/allpna",method = RequestMethod.GET)
+    public List<Table> getAllPna(){
+        List<ProgrammingLanguageEntity> programmingLanguageEntities =  programmingLanguageRepository.findAll();
+        List<ProgrammingLanguageEntity> programmingLanguageEntities1 = new ArrayList<>();
+        List<Table> tableList = new ArrayList<>();
+
+
+        for(int i=0;i<programmingLanguageEntities.size();i++){
+            if(programmingLanguageEntities.get(i).getDeveloperEntitiesP().size() == 0){
+//                programmingLanguageEntities.remove(programmingLanguageEntities.get(i));
+//                i--;
+                programmingLanguageEntities1.add(programmingLanguageEntities.get(i));
+                Table table = new Table();
+                table.setProgrammingLanguage(programmingLanguageEntities.get(i).getName());
+                table.setLanguage("");
+                table.setEmail("");
+                tableList.add(table);
+//                table.setUserId("");
+            }
+        }
+
+//        for(ProgrammingLanguageEntity pe: programmingLanguageEntities){
+//            if(pe.getDeveloperEntitiesP().size()>=0){
+////                programmingLanguageEntities.remove(new ProgrammingLanguageEntity(pe));
+//            }
+//        }
+        return tableList;
+    }
+
+
     //get email list
     @RequestMapping(value="/getemaillist/{lang}",method = RequestMethod.GET)
     public ArrayList<String> getemaillist(@PathVariable String lang){
