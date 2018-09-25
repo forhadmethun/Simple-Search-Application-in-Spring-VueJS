@@ -22,7 +22,7 @@ import java.util.Random;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
-    private BookingRepository bookingRepository;
+//    private BookingRepository bookingRepository;
 
     private DeveloperRepository developerRepository;
 
@@ -33,14 +33,15 @@ public class DatabaseSeeder implements CommandLineRunner {
     private InterviewRepository interviewRepository;
 
     @Autowired
-    public DatabaseSeeder(BookingRepository bookingRepository,
+    public DatabaseSeeder(
+//            BookingRepository bookingRepository,
                           DeveloperRepository developerRepository,
                           LanguageRepository languageRepository,
                           ProgrammingLanguageRepository programmingLanguageRepository,
                           InterviewRepository interviewRepository
 
     ){
-        this.bookingRepository = bookingRepository;
+//        this.bookingRepository = bookingRepository;
         this.developerRepository = developerRepository;
         this.languageRepository = languageRepository;
         this.programmingLanguageRepository = programmingLanguageRepository;
@@ -52,13 +53,13 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<HotelBookingEntity> bookings = new ArrayList<>();
-        bookings = new ArrayList<>();
-        bookings.add(new HotelBookingEntity(1L,"Marriot",200.5,3));
-        bookings.add(new HotelBookingEntity(2L,"Bis",90,4));
-        bookings.add(new HotelBookingEntity(3L,"Novotr",100.75,1));
-
-        bookingRepository.save(bookings);
+//        List<HotelBookingEntity> bookings = new ArrayList<>();
+//        bookings = new ArrayList<>();
+//        bookings.add(new HotelBookingEntity(1L,"Marriot",200.5,3));
+//        bookings.add(new HotelBookingEntity(2L,"Bis",90,4));
+//        bookings.add(new HotelBookingEntity(3L,"Novotr",100.75,1));
+//
+//        bookingRepository.save(bookings);
 
         List<InterviewEntity> interviewEntities = new ArrayList<>();
         interviewEntities.add(new InterviewEntity("Software Engineer"));

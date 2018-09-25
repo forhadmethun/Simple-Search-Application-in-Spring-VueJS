@@ -283,6 +283,121 @@
                     </v-data-table>
                 </div>
 
+
+                <div>
+                    <%--<v-toolbar flat color="white">--%>
+                        <%--<v-toolbar-title>API</v-toolbar-title>--%>
+                        <%--<v-divider--%>
+                                <%--class="mx-2"--%>
+                                <%--inset--%>
+                                <%--vertical--%>
+                        <%--></v-divider>--%>
+                        <%--<v-spacer></v-spacer>--%>
+                        <%--<v-dialog v-model="dialog" max-width="500px">--%>
+
+                        <%--</v-dialog>--%>
+                    <%--</v-toolbar>--%>
+                    <%--<v-card>--%>
+                        <h2 style="margin-left: 2%;"><b>API</b></h2>
+
+                        <p style="margin-left: 60px;background: #6ad06a;" >1. Search developer by developer id(<i>&lt;base url&gt;/getdeveloperbyid/{id}</i>), GET Request</p>
+                        <br/><p style="margin-left: 60px;">
+                        <br/>Request - <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp; /getdeveloperbyid/1
+                    <br/>
+                    Response -
+                    </p><br/>
+                        <code>
+                            {
+                                id: 1,
+                                email: "poohpool@signet.com",
+                                languageEntities: [ ],
+                                programmingLanguageEntities: [
+                                {
+                                    id: 18,
+                                    name: "Obliq"
+                                }
+                                ]
+                            }
+                        </code>
+
+                        <br/>
+                        <br/>
+                        <p style="margin-left: 60px;background: #6ad06a;" >2. Search developer by developer email(<i>&lt;base url&gt;/getdeveloperbyemail/{email}</i>), GET Request </p>
+                        <br/><p style="margin-left: 60px;"> <br/>Request - <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp; /getdeveloperbyemail/issabelle_gal@hotmail.com <br/>
+                        Response -
+                    </p><br/>
+                        <code>
+                            {
+                                id: 1,
+                                email: "poohpool@signet.com",
+                                languageEntities: [ ],
+                                programmingLanguageEntities: [
+                                {
+                                    id: 18,
+                                    name: "Obliq"
+                                }
+                                ]
+                            }
+                        </code>
+
+                        <br/>
+                        <br/>
+                        <p style="margin-left: 60px;background: #6ad06a;" >3. Create developer(<i>&lt;base url&gt;/getdeveloperbyemail/{email}</i>), POST Request</p>
+                        <br/><p style="margin-left: 60px;"><br/>Request - <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp; /createdeveloper </p><br/>
+                        <code>
+                            {
+
+                                 "email": "hello_mail@signet.com",
+
+                            }
+                        </code>
+                        <p style="margin-left: 60px;">Response -<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp; The details of the created developer.
+                        </p>
+                        <br/>
+                        <br/>
+                        <p style="margin-left: 60px;background: #6ad06a;" >4. Update developer(<i>&lt;base url&gt;/updatedeveloper</i>), PUT Request</p>
+                        <br/><p style="margin-left: 60px;"><br/>Request - <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp; /updatedeveloper </p><br/>
+                        <code>
+                            {
+                              "id": 3,
+                              "email": "hello_mail@signet.com",
+
+                            }
+                        </code>
+                        <p style="margin-left: 60px;">Response -<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp; The details of the updated developer.
+                        </p>
+
+                        <br/>
+                        <br/>
+                        <p style="margin-left: 60px;background: #6ad06a;" >6. Delete a developer(<i>&lt;base url&gt;/deletedeveloper/{id}</i>), GET Request</p>
+                        <br/><p style="margin-left: 60px;"><br/>Request - <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;  /deletedeveloper/1 </p><br/>
+                        <p style="margin-left:60px">Response - </p>
+                        <code>
+                            return all developers list after deleting the developer with id 1
+                        </code>
+
+
+                        <p style="margin-left: 60px;background: #6ad06a;" >7. Get all developer (<i>&lt;base url&gt;/getalldeveloper</i>) </p>
+                        <br/><p style="margin-left: 60px;"><br/>Request - <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;  /getalldeveloper </p><br/>
+                        <p style="margin-left:60px">Response - </p>
+                        <div style="overflow-y: scroll; height:400px;margin-left:12%">
+                            <code id="json"></code>
+                        </div>
+
+
+                        <br/><br/>
+
+                    <%--</v-card>--%>
+                </div>
+
                 <%--<v-card-text style="height: 100px;margin-top:60px; position: relative">--%>
                 <%--<v-fab-transition>--%>
                 <%--<v-btn--%>
@@ -709,7 +824,8 @@
             },
             nameWithLang({name, language}) {
                 return `${name} — [${language}]`
-            }, searchAll() {
+            },
+            searchAll() {
                 console.log('!!searchall called!!');
                 var data = {
                     "email": this.selectEmail,
@@ -726,6 +842,31 @@
                         console.log(result.data);
                         console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                         this.tableItems = result.data;
+
+
+                    })
+                    .catch(function (error) {
+                    });
+            },
+            getAllDeveloper() {
+                // console.log('!!searchall called!!');
+                // var data = {
+                //     "email": this.selectEmail,
+                //     "code": this.selectLanguage,
+                //     "name": this.selectProgrammingLanguage
+                // };
+                // console.log(JSON.stringify(data));
+                //
+                // var url1 = "workordergenerate";
+                axios.get('/getalldeveloper')
+                    .then(result => {
+                        // alert('data from searchalldata!!');
+                        // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                        // console.log(result.data);
+                        // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                        // this.tableItems = result.data;
+                        document.getElementById("json").innerHTML = JSON.stringify(result.data, undefined, 2);
+
 
 
                     })
@@ -807,7 +948,7 @@
                         carbs: 65,
                         protein: 7
                     }
-                ]
+                ];
                 // alert('before get interview');
                 axios.get('/getinterview')
                     .then((response) => {
@@ -1048,6 +1189,8 @@
                     console.log(this.desserts);
                     console.log("==end==");
                     document.getElementById('app').style.visibility = 'visible';
+
+                    this.getAllDeveloper();
                 })
                 .catch(function (error) {
                     // handle error

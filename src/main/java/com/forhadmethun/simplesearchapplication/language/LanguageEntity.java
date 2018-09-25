@@ -27,7 +27,7 @@ public class LanguageEntity {
 
 
     //    @JsonIgnore
-    @ManyToMany(mappedBy = "languageEntities")
+    @ManyToMany(mappedBy = "languageEntities",cascade = {CascadeType.REMOVE},fetch = FetchType.LAZY)
 //    @JsonIgnoreProperties("columns")
     @JsonIgnoreProperties("languageEntities")
     private List<DeveloperEntity> developerEntities = new ArrayList<>();

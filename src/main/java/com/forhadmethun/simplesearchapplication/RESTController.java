@@ -21,8 +21,8 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "")
 public class RESTController {
-    @Autowired
-    private BookingRepository bookingRepository;
+//    @Autowired
+//    private BookingRepository bookingRepository;
     @Autowired
     private DeveloperRepository developerRepository;
 
@@ -45,10 +45,10 @@ public class RESTController {
 //
 //
 //    }
-    @RequestMapping(value="/all",method = RequestMethod.GET)
-    public List<HotelBookingEntity> getAll(){
-        return bookingRepository.findAll();
-    }
+//    @RequestMapping(value="/all",method = RequestMethod.GET)
+//    public List<HotelBookingEntity> getAll(){
+//        return bookingRepository.findAll();
+//    }
 
     @RequestMapping(value="/alldev",method = RequestMethod.GET)
     public List<DeveloperEntity> getAllDev(){
@@ -301,24 +301,24 @@ public class RESTController {
 
 
 
-
-    @RequestMapping(value="/affordable/{price}",method = RequestMethod.GET)
-    public List<HotelBookingEntity> getAffordable(@PathVariable double price){
-        return bookingRepository.findByPricePerNightLessThan(price);
-
-    }
-    @RequestMapping(value="/create", method=RequestMethod.POST)
-    public List<HotelBookingEntity> create(@RequestBody HotelBookingEntity hotelBookingEntity){
-        bookingRepository.save(hotelBookingEntity);
-        return bookingRepository.findAll();
-
-    }
-
-    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public List<HotelBookingEntity> remove(@PathVariable long id){
-        bookingRepository.delete(bookingRepository.getOne(id));
-        return bookingRepository.findAll();
-    }
+//
+//    @RequestMapping(value="/affordable/{price}",method = RequestMethod.GET)
+//    public List<HotelBookingEntity> getAffordable(@PathVariable double price){
+//        return bookingRepository.findByPricePerNightLessThan(price);
+//
+//    }
+//    @RequestMapping(value="/create", method=RequestMethod.POST)
+//    public List<HotelBookingEntity> create(@RequestBody HotelBookingEntity hotelBookingEntity){
+//        bookingRepository.save(hotelBookingEntity);
+//        return bookingRepository.findAll();
+//
+//    }
+//
+//    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
+//    public List<HotelBookingEntity> remove(@PathVariable long id){
+//        bookingRepository.delete(bookingRepository.getOne(id));
+//        return bookingRepository.findAll();
+//    }
 
 
     /*all api related to interview */
@@ -344,7 +344,7 @@ public class RESTController {
         return interviewRepository.findAll();
     }
     @RequestMapping(value="/getinterview", method=RequestMethod.GET)
-    public List<InterviewEntity> getallinterview(){
+    public List<InterviewEntity> getallinterviews(){
         return interviewRepository.findAll();
     }
     @RequestMapping(value="/updateinterview", method=RequestMethod.POST)
@@ -367,6 +367,84 @@ public class RESTController {
         return interviewRepository.findAll();
     }
     /*end all api related to interview */
+
+    /*all api related to developer */
+
+
+    @RequestMapping(value="/createdeveloper", method=RequestMethod.POST)
+    public List<DeveloperEntity> createdeveloper(@RequestBody JSONObject data){
+
+//        LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
+//        System.out.println(linkedHashMap);
+
+//        String id = linkedHashMap.get("id");
+        String email = (String)data.get("email");
+
+
+        developerRepository.save(new DeveloperEntity(email));
+        return developerRepository.findByEmailLike(email);
+
+    }
+
+    @RequestMapping(value="/deletedeveloper/{id}", method = RequestMethod.GET)
+    public List<DeveloperEntity> deletedev(@PathVariable long id){
+        DeveloperEntity developerEntity = developerRepository.getOne(id);
+
+        List<ProgrammingLanguageEntity> pe = developerEntity.getProgrammingLanguageEntities();
+        for(int i=0;i<pe.size();i++){
+            ProgrammingLanguageEntity p = pe.get(i);
+            p.getDeveloperEntitiesP().clear();
+            programmingLanguageRepository.save(p);
+        }
+
+//        programmingLanguageRepository.getOne()
+
+        developerEntity.getProgrammingLanguageEntities().clear();
+        developerEntity.getLanguageEntities().clear();
+        developerRepository.save(developerEntity);
+        developerRepository.delete(developerRepository.getOne(id));
+        return developerRepository.findAll();
+    }
+    @RequestMapping(value="/getdeveloperbyemail/{email}",method = RequestMethod.GET)
+    public List<DeveloperEntity> getDeveloperByEmailAddress(@PathVariable String email){
+        List<DeveloperEntity> developerEntities =  developerRepository.findByEmailLike("%"+email+"%");
+      return developerEntities;
+    }
+    @RequestMapping(value="/getalldeveloper", method=RequestMethod.GET)
+    public List<DeveloperEntity> getalldev(){
+        return developerRepository.findAll();
+    }
+    @RequestMapping(value="/getdeveloperbyid/{id}", method=RequestMethod.GET)
+    public DeveloperEntity getdeveloperbyid(@PathVariable long id){
+        return developerRepository.findOne(id);
+    }
+//    @RequestMapping(value="/getdeveloperbyemail/{email}", method=RequestMethod.GET)
+//    public List<DeveloperEntity> getdeveloperbyemail(@PathVariable String email){
+//        return developerRepository.findByEmailLike(email);
+//    }
+    @RequestMapping(value="/updatedeveloper", method=RequestMethod.PUT)
+    public List<DeveloperEntity> updatedeveloper(@RequestBody JSONObject data){
+        LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
+//        System.out.println(linkedHashMap);
+
+        Integer intId = (Integer)data.get("id");// = Long.parseLong(linkedHashMap.get("id"));
+        long id = new Long(intId);
+        String name =(String) data.get("email");//  linkedHashMap.get("name");
+
+
+
+        DeveloperEntity developerEntity1 = developerRepository.getOne(id);
+        developerEntity1.setEmail(name);
+        developerEntity1.setId(id);
+
+//        developerRepository.delete(id);
+        developerRepository.save(developerEntity1);
+        return developerRepository.findByEmailLike(name);
+    }
+
+
+    /*end all api related to interview */
+
 
 
 }
