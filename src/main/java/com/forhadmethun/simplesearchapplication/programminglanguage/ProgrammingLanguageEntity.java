@@ -19,13 +19,7 @@ public class ProgrammingLanguageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String name;
-
-//    private long developerId;
-
-
-
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -33,38 +27,14 @@ public class ProgrammingLanguageEntity {
             joinColumns = {@JoinColumn(name = "programming_languagesid")},
             inverseJoinColumns = {@JoinColumn(name="developersid")}
     )
-//    @JsonIgnoreProperties("users")
-//    @JsonIgnoreProperties("columns")
     private List<DeveloperEntity> developerEntitiesP = new ArrayList<>();
 
-
-
-
-//    //    @JsonIgnore
-//    @ManyToMany(mappedBy = "programmingLanguageEntities")
-////    @JsonIgnoreProperties("columns")
-//    @JsonIgnoreProperties("programmingLanguageEntities")
-//    private List<DeveloperEntity> developerEntitiesP = new ArrayList<>();
-
-
-
-
-
-
-
-
-//    private long languageId;
-
-//    private double pricePerNight;
-//    private int nbOfNights;
     public ProgrammingLanguageEntity(long id,String name){
         this.id = id;
         this.name = name;
-//        this.developerId = developerId;
     }
     public ProgrammingLanguageEntity(String name){
         this.name = name;
-//        this.developerId = developerId;
     }
 
 }

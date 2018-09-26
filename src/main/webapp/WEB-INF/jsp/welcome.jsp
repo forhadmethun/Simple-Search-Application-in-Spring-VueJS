@@ -712,7 +712,7 @@
                 // alert('serch prog');
 
 
-                axios.get('/getprogramminglanguagelist/' + v)
+                axios.get('<%=request.getContextPath()%>/getprogramminglanguagelist/' + v)
                     .then((response) => {
                         // handle success
                         // alert('come here');
@@ -754,7 +754,7 @@
                 // alert('serch prog');
 
 
-                axios.get('/getlanguagelist/' + v)
+                axios.get('<%=request.getContextPath()%>/getlanguagelist/' + v)
                     .then((response) => {
                         // handle success
                         // alert('come here');
@@ -790,7 +790,7 @@
                 // alert('serch prog');
 
 
-                axios.get('/getemaillist/' + v)
+                axios.get('<%=request.getContextPath()%>/getemaillist/' + v)
                     .then((response) => {
                         // handle success
                         // alert('come here');
@@ -835,7 +835,7 @@
                 console.log(JSON.stringify(data));
 
                 var url1 = "workordergenerate";
-                axios.post('/searchalldata', {data})
+                axios.post('<%=request.getContextPath()%>/searchalldata', {data})
                     .then(result => {
                         // alert('data from searchalldata!!');
                         console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
@@ -858,7 +858,7 @@
                 // console.log(JSON.stringify(data));
                 //
                 // var url1 = "workordergenerate";
-                axios.get('/getalldeveloper')
+                axios.get('<%=request.getContextPath()%>/getalldeveloper')
                     .then(result => {
                         // alert('data from searchalldata!!');
                         // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
@@ -950,7 +950,7 @@
                     }
                 ];
                 // alert('before get interview');
-                axios.get('/getinterview')
+                axios.get('<%=request.getContextPath()%>/getinterview')
                     .then((response) => {
                         this.desserts = response.data;
                         console.log("======start interview data ======'\n");
@@ -1003,7 +1003,7 @@
                 if (confirm('Are you sure you want to delete this item?')) {
                     // this.desserts.splice(index, 1);
 
-                    axios.get('/deleteinterview/' + item.id)
+                    axios.get('<%=request.getContextPath()%>/deleteinterview/' + item.id)
                         .then((response) => {
                             // handle success
                             // alert('come here');
@@ -1048,7 +1048,7 @@
                     // };
                     // console.log(JSON.stringify(data));
 
-                    axios.post('/updateinterview', {
+                    axios.post('<%=request.getContextPath()%>/updateinterview', {
                         "id": this.editedItem.id,
                         "name": this.editedItem.name,
                     })
@@ -1068,7 +1068,7 @@
                     };
                     console.log(JSON.stringify(data));
 
-                    axios.post('/createinterview', {"name": this.editedItem.name})
+                    axios.post('<%=request.getContextPath()%>/createinterview', {"name": this.editedItem.name})
                         .then(result => {
                             this.initialize();
 
@@ -1081,7 +1081,7 @@
             },
 
             getAllData() {
-                axios.get('/searchall')
+                axios.get('<%=request.getContextPath()%>/searchall')
                     .then((response) => {
                         // handle success
                         // alert('come here');
@@ -1102,7 +1102,7 @@
                     });
             },
             getAllpna() {
-                axios.get('/allpna')
+                axios.get('<%=request.getContextPath()%>/allpna')
                     .then((response) => {
                         // handle success
                         // alert('come here');
@@ -1178,7 +1178,7 @@
 
         mounted: function () {
             // $('#app').css('visibility','visible');
-            axios.get('/searchall')
+            axios.get('<%=request.getContextPath()%>/searchall')
                 .then((response) => {
                     // handle success
                     // alert('come here');

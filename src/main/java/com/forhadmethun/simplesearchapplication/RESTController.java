@@ -7,22 +7,16 @@ import com.forhadmethun.simplesearchapplication.language.LanguageEntity;
 import com.forhadmethun.simplesearchapplication.language.LanguageRepository;
 import com.forhadmethun.simplesearchapplication.programminglanguage.ProgrammingLanguageEntity;
 import com.forhadmethun.simplesearchapplication.programminglanguage.ProgrammingLanguageRepository;
-import com.forhadmethun.simplesearchapplication.test.BookingRepository;
-import com.forhadmethun.simplesearchapplication.test.HotelBookingEntity;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.web.bind.annotation.*;
-import sun.awt.image.ImageWatched;
-
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.*;
 
 @RestController
 @RequestMapping(value = "")
 public class RESTController {
-//    @Autowired
-//    private BookingRepository bookingRepository;
     @Autowired
     private DeveloperRepository developerRepository;
 
@@ -40,15 +34,6 @@ public class RESTController {
     private DAO dao;
 
     @Autowired
-//    public RESTController(BookingRepository bookingRepository){
-//        this.bookingRepository = bookingRepository;
-//
-//
-//    }
-//    @RequestMapping(value="/all",method = RequestMethod.GET)
-//    public List<HotelBookingEntity> getAll(){
-//        return bookingRepository.findAll();
-//    }
 
     @RequestMapping(value="/alldev",method = RequestMethod.GET)
     public List<DeveloperEntity> getAllDev(){
@@ -75,23 +60,14 @@ public class RESTController {
 
         for(int i=0;i<programmingLanguageEntities.size();i++){
             if(programmingLanguageEntities.get(i).getDeveloperEntitiesP().size() == 0){
-//                programmingLanguageEntities.remove(programmingLanguageEntities.get(i));
-//                i--;
                 programmingLanguageEntities1.add(programmingLanguageEntities.get(i));
                 Table table = new Table();
                 table.setProgrammingLanguage(programmingLanguageEntities.get(i).getName());
                 table.setLanguage("");
                 table.setEmail("");
                 tableList.add(table);
-//                table.setUserId("");
             }
         }
-
-//        for(ProgrammingLanguageEntity pe: programmingLanguageEntities){
-//            if(pe.getDeveloperEntitiesP().size()>=0){
-////                programmingLanguageEntities.remove(new ProgrammingLanguageEntity(pe));
-//            }
-//        }
         return tableList;
     }
 
@@ -133,19 +109,14 @@ public class RESTController {
 
 
     //search by programminglanguage
-
     @RequestMapping(value="/searchp",method = RequestMethod.GET)
     public  List<Object[]> searchByP(){
         List<Object[]> rows = dao.searchByProgrammingLanguage("en");
-//        System.out.println("==========");
-//        return programmingLanguageRepository.findAll();
         return rows;
     }
     @RequestMapping(value="/searchp/{lang}",method = RequestMethod.GET)
     public  List<Object[]> searchByL(@PathVariable String lang){
         List<Object[]> rows = dao.searchByProgrammingLanguage(lang);
-//        System.out.println("==========");
-//        return programmingLanguageRepository.findAll();
         return rows;
     }
 
@@ -153,20 +124,15 @@ public class RESTController {
     @RequestMapping(value="/searchpl/{lang}",method = RequestMethod.GET)
     public  List<Table>  searchBypl(@PathVariable String lang){
         List<Object[]> rows = dao.searchByProgrammingLanguage(lang);
-//        System.out.println("==========");
-//        return programmingLanguageRepository.findAll();
         List<Table> tables = new ArrayList<>();
         for(Object[] row: rows){
             Table table = new Table();
-//str!=null && str.equals("hi") (String)
             table.setEmail(row[1]!=null?(String)row[1]:"");
             BigInteger bigInteger = (BigInteger)row[0];
             table.setUserId(bigInteger.longValue());
-//            table.setUserId((Long) row[0]!=null?(Long)row[0]:-1);
             table.setLanguage((String) row[2]!=null?(String)row[2]:"");
             table.setProgrammingLanguage((String) row[3]!=null?(String)row[3]:"");
             tables.add(table);
-
         }
         return tables;
     }
@@ -182,53 +148,32 @@ public class RESTController {
     @RequestMapping(value="/searchall",method = RequestMethod.GET)
     public  List<Table> searchall(){
         List<Object[]> rows = dao.search("","","");
-//        System.out.println("==========");
-//        return programmingLanguageRepository.findAll();
         List<Table> tables = new ArrayList<>();
         for(Object[] row: rows){
             Table table = new Table();
-//str!=null && str.equals("hi") (String)
             table.setEmail(row[1]!=null?(String)row[1]:"");
             BigInteger bigInteger = (BigInteger)row[0];
             table.setUserId(bigInteger.longValue());
-//            table.setUserId((Long) row[0]!=null?(Long)row[0]:-1);
             table.setLanguage((String) row[2]!=null?(String)row[2]:"");
             table.setProgrammingLanguage((String) row[3]!=null?(String)row[3]:"");
             tables.add(table);
 
         }
-
-
-
-
-
         Collections.sort(tables,new CustomComparator());
-
         ArrayList<Table> newtables = new ArrayList<>();
         Table previousTable = tables.get(0);
         newtables.add(previousTable);
-
-
         for(int i=1;i<tables.size();i++){
             Table t = tables.get(i);
             if(t.getEmail().equals(previousTable.getEmail())){
                 if(previousTable.getLanguage().indexOf(t.getLanguage())==-1)previousTable.setLanguage(previousTable.getLanguage() + ", " + t.getLanguage());
                 if(previousTable.getProgrammingLanguage().indexOf(t.getProgrammingLanguage())==-1)previousTable.setProgrammingLanguage(previousTable.getProgrammingLanguage() + ", " + t.getProgrammingLanguage());
-//                tables.remove(t);
                 continue;
             }
             previousTable = t;
             newtables.add(previousTable);
             System.out.println(i + "--> " + t.toString());
         }
-        System.out.println("==========");
-//        tables.remove(table);
-//        tables.remove(table);
-        for(Table t: newtables){
-            System.out.println("NEW-" + t.toString());
-        }
-
-
         return newtables;
     }
 
@@ -299,40 +244,11 @@ public class RESTController {
     }
 
 
-
-
-//
-//    @RequestMapping(value="/affordable/{price}",method = RequestMethod.GET)
-//    public List<HotelBookingEntity> getAffordable(@PathVariable double price){
-//        return bookingRepository.findByPricePerNightLessThan(price);
-//
-//    }
-//    @RequestMapping(value="/create", method=RequestMethod.POST)
-//    public List<HotelBookingEntity> create(@RequestBody HotelBookingEntity hotelBookingEntity){
-//        bookingRepository.save(hotelBookingEntity);
-//        return bookingRepository.findAll();
-//
-//    }
-//
-//    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-//    public List<HotelBookingEntity> remove(@PathVariable long id){
-//        bookingRepository.delete(bookingRepository.getOne(id));
-//        return bookingRepository.findAll();
-//    }
-
-
     /*all api related to interview */
 
     @RequestMapping(value="/createinterview", method=RequestMethod.POST)
     public List<InterviewEntity> createinterview(@RequestBody JSONObject data){
-
-//        LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
-//        System.out.println(linkedHashMap);
-
-//        String id = linkedHashMap.get("id");
         String name = (String)data.get("name");
-
-
         interviewRepository.save(new InterviewEntity(name));
         return interviewRepository.findAll();
 
@@ -350,14 +266,9 @@ public class RESTController {
     @RequestMapping(value="/updateinterview", method=RequestMethod.POST)
     public List<InterviewEntity> updateinterview(@RequestBody JSONObject data){
         LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
-//        System.out.println(linkedHashMap);
-
-        Integer intId = (Integer)data.get("id");// = Long.parseLong(linkedHashMap.get("id"));
+        Integer intId = (Integer)data.get("id");
         long id = new Long(intId);
-        String name =(String) data.get("name");//  linkedHashMap.get("name");
-
-
-
+        String name =(String) data.get("name");
         InterviewEntity interviewEntity1 = interviewRepository.getOne(id);
         interviewEntity1.setName(name);
         interviewEntity1.setId(id);
@@ -373,14 +284,7 @@ public class RESTController {
 
     @RequestMapping(value="/createdeveloper", method=RequestMethod.POST)
     public List<DeveloperEntity> createdeveloper(@RequestBody JSONObject data){
-
-//        LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
-//        System.out.println(linkedHashMap);
-
-//        String id = linkedHashMap.get("id");
         String email = (String)data.get("email");
-
-
         developerRepository.save(new DeveloperEntity(email));
         return developerRepository.findByEmailLike(email);
 
@@ -396,9 +300,6 @@ public class RESTController {
             p.getDeveloperEntitiesP().clear();
             programmingLanguageRepository.save(p);
         }
-
-//        programmingLanguageRepository.getOne()
-
         developerEntity.getProgrammingLanguageEntities().clear();
         developerEntity.getLanguageEntities().clear();
         developerRepository.save(developerEntity);
@@ -418,26 +319,16 @@ public class RESTController {
     public DeveloperEntity getdeveloperbyid(@PathVariable long id){
         return developerRepository.findOne(id);
     }
-//    @RequestMapping(value="/getdeveloperbyemail/{email}", method=RequestMethod.GET)
-//    public List<DeveloperEntity> getdeveloperbyemail(@PathVariable String email){
-//        return developerRepository.findByEmailLike(email);
-//    }
+
     @RequestMapping(value="/updatedeveloper", method=RequestMethod.PUT)
     public List<DeveloperEntity> updatedeveloper(@RequestBody JSONObject data){
         LinkedHashMap<String,String> linkedHashMap = (LinkedHashMap<String, String>) data.get("data");
-//        System.out.println(linkedHashMap);
-
-        Integer intId = (Integer)data.get("id");// = Long.parseLong(linkedHashMap.get("id"));
+        Integer intId = (Integer)data.get("id");
         long id = new Long(intId);
-        String name =(String) data.get("email");//  linkedHashMap.get("name");
-
-
-
+        String name =(String) data.get("email");
         DeveloperEntity developerEntity1 = developerRepository.getOne(id);
         developerEntity1.setEmail(name);
         developerEntity1.setId(id);
-
-//        developerRepository.delete(id);
         developerRepository.save(developerEntity1);
         return developerRepository.findByEmailLike(name);
     }

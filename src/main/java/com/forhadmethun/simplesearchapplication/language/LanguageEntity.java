@@ -18,29 +18,14 @@ public class LanguageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String code;
 
-//    private long developerId;
-
-
-
-
-    //    @JsonIgnore
     @ManyToMany(mappedBy = "languageEntities",cascade = {CascadeType.REMOVE},fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties("columns")
     @JsonIgnoreProperties("languageEntities")
     private List<DeveloperEntity> developerEntities = new ArrayList<>();
 
-
-
-//    private long programmingLanguageId;
-
-//    private double pricePerNight;
-//    private int nbOfNights;
     public LanguageEntity( String code){
         this.code = code;
-//        this.developerId = developerId;
     }
 
 

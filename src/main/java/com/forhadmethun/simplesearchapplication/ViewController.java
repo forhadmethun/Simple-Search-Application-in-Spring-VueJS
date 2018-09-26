@@ -12,9 +12,8 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class ViewController {
-    @RequestMapping(value = {"/dashboard", "/"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/"},method = RequestMethod.GET)
     public ModelAndView getDashboard(){
         return  new ModelAndView("welcome");
     }
-
 }

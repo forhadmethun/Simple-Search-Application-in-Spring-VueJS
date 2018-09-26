@@ -8,6 +8,4 @@ public class Table {
     String email;
     String language;
     String programmingLanguage;
-
-
 }
