@@ -33,14 +33,6 @@
                         <v-list-tile-title>Home</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
-                <%--<v-list-tile @click="">--%>
-                <%--<v-list-tile-action>--%>
-                <%--<v-icon>contact_mail</v-icon>--%>
-                <%--</v-list-tile-action>--%>
-                <%--&lt;%&ndash;<v-list-tile-content>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<v-list-tile-title>Admin</v-list-tile-title>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</v-list-tile-content>&ndash;%&gt;--%>
-                <%--</v-list-tile>--%>
             </v-list>
         </v-navigation-drawer>
         <v-toolbar color="indigo" dark fixed app>
@@ -48,13 +40,11 @@
             <v-toolbar-title>Simple Search Application</v-toolbar-title>
         </v-toolbar>
         <v-content>
-            <%--<h1>App -</h1>--%>
             <v-app id="inspire">
                 <v-toolbar
                         dark
                         color="teal"
                 >
-                    <%--<v-toolbar-title>Email selection</v-toolbar-title>--%>
                     <v-autocomplete
                             :loading="eloading"
                             :items="emailitems"
@@ -79,7 +69,6 @@
                         dark
                         color="teal"
                 >
-                    <%--<v-toolbar-title>Programming Languages selection</v-toolbar-title>--%>
                     <v-autocomplete
                             :loading="plloading"
                             :items="plitems"
@@ -101,7 +90,6 @@
                         dark
                         color="teal"
                 >
-                    <%--<v-toolbar-title>Languages selection</v-toolbar-title>--%>
                     <v-autocomplete
                             :loading="lloading"
                             :items="litems"
@@ -120,7 +108,6 @@
                     </v-btn>
 
                 </v-toolbar>
-                <%--<v-btn slot="activator" color="primary" dark class="mb-2">All Item</v-btn>--%>
                 <div class="v-toolbar__content" style="height: 64px;">
                     <div class="v-toolbar__title"></div>
                     <hr class="mx-2 v-divider v-divider--inset v-divider--vertical theme--light">
@@ -138,53 +125,17 @@
                     </div>
                 </div>
                 <v-card>
-
-                    <%--<div>--%>
-                    <%--<label class="typo__label">Simple select / dropdown</label>--%>
-                    <%--<multiselect v-model="value" :options="options" :multiple="false" :close-on-select="false" :clear-on-select="false" :hide-selected="true" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">--%>
-                    <%--<template slot="tag" slot-scope="props"><span class="custom__tag"><span>{{ props.option.language }}</span><span class="custom__remove" @click="props.remove(props.option)">x</span></span></template>--%>
-                    <%--</multiselect>--%>
-                    <%--<pre class="language-json"><code>{{ value  }}</code></pre>--%>
-                    <%--</div>--%>
-
-
                 </v-card>
 
 
                 <v-card>
                     <v-card-title>
-                        <%--Nutrition--%>
-                        <%--<v-spacer></v-spacer>--%>
-                        <%--<v-text-field--%>
-                        <%--v-model="search"--%>
-                        <%--append-icon="search"--%>
-                        <%--label="Search"--%>
-                        <%--single-line--%>
-                        <%--hide-details--%>
-                        <%--></v-text-field>--%>
-
-
-                        <%--<template slot="items" slot-scope="props">--%>
-                        <%--<td>{{ props.item.email }}</td>--%>
-                        <%--<td>{{ props.item.programmingLanguage--%>
-                        <%--}}</td>--%>
-                        <%--<td>{{ props.item.language--%>
-                        <%--}}</td>--%>
-                        <%--</template>--%>
-
-
                     </v-card-title>
                     <v-data-table
                             :headers="headers"
                             :items="tableItems"
                             :search="search"
                     >
-                        <%--<template slot="items" slot-scope="props">--%>
-                        <%--<td>{{ props.item.name }}</td>--%>
-                        <%--<td>{{ props.item.calories }}</td>--%>
-                        <%--<td>{{ props.item.fat }}</td>--%>
-                        <%--</template>--%>
-
                         <template slot="items" slot-scope="props">
                             <td>{{ props.item.email }}</td>
                             <td>{{ props.item.programmingLanguage
@@ -200,7 +151,6 @@
                         </v-alert>
                     </v-data-table>
                 </v-card>
-
                 <%--start crud--%>
                 <div>
                     <v-toolbar flat color="white">
@@ -225,18 +175,6 @@
                                                 <v-text-field v-model="editedItem.name"
                                                               label="Interview name"></v-text-field>
                                             </v-flex>
-                                            <%--<v-flex xs12 sm6 md4>--%>
-                                            <%--<v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>--%>
-                                            <%--</v-flex>--%>
-                                            <%--<v-flex xs12 sm6 md4>--%>
-                                            <%--<v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>--%>
-                                            <%--</v-flex>--%>
-                                            <%--<v-flex xs12 sm6 md4>--%>
-                                            <%--<v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>--%>
-                                            <%--</v-flex>--%>
-                                            <%--<v-flex xs12 sm6 md4>--%>
-                                            <%--<v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>--%>
-                                            <%--</v-flex>--%>
                                         </v-layout>
                                     </v-container>
                                 </v-card-text>
@@ -257,10 +195,6 @@
                     >
                         <template slot="items" slot-scope="props">
                             <td>{{ props.item.name }}</td>
-                            <%--<td class="text-xs-right">{{ props.item.calories }}</td>--%>
-                            <%--<td class="text-xs-right">{{ props.item.fat }}</td>--%>
-                            <%--<td class="text-xs-right">{{ props.item.carbs }}</td>--%>
-                            <%--<td class="text-xs-right">{{ props.item.protein }}</td>--%>
                             <td class="justify-center layout px-0">
                                 <v-icon
                                         small
@@ -285,19 +219,6 @@
 
 
                 <div>
-                    <%--<v-toolbar flat color="white">--%>
-                        <%--<v-toolbar-title>API</v-toolbar-title>--%>
-                        <%--<v-divider--%>
-                                <%--class="mx-2"--%>
-                                <%--inset--%>
-                                <%--vertical--%>
-                        <%--></v-divider>--%>
-                        <%--<v-spacer></v-spacer>--%>
-                        <%--<v-dialog v-model="dialog" max-width="500px">--%>
-
-                        <%--</v-dialog>--%>
-                    <%--</v-toolbar>--%>
-                    <%--<v-card>--%>
                         <h2 style="margin-left: 2%;"><b>API</b></h2>
 
                         <p style="margin-left: 60px;background: #6ad06a;" >1. Search developer by developer id(<i>&lt;base url&gt;/getdeveloperbyid/{id}</i>), GET Request</p>
@@ -666,10 +587,9 @@
         watch: {
             searchEmail(val) {
 
-                val && val !== this.select && this.querySelectionsSearchEmail(val);
+                val && val !== this.select && this.querySelectionsSearchEmail(val.split('@', 1)[0]);
                 if (!val) {
                     this.selectEmail = null;
-                    // alert('faka');
                     this.searchAll();
                 }
             },
@@ -714,15 +634,7 @@
 
                 axios.get('<%=request.getContextPath()%>/getprogramminglanguagelist/' + v)
                     .then((response) => {
-                        // handle success
-                        // alert('come here');
-                        console.log(response);
-                        // this.desserts = response.data;
                         this.programmingLanguages = response.data;
-                        // console.log("======start======'\n");
-                        // console.log(this.programmingLanguages);
-                        // console.log("==end==");
-                        // document.getElementById('app').style.visibility = 'visible';
                         this.searchAll();
 
 
@@ -749,22 +661,10 @@
             },
             querySelectionsSearchLanguage(v) {
                 this.lloading = true;
-                // Simulated ajax query
-                // alert('val:'+v);
-                // alert('serch prog');
-
 
                 axios.get('<%=request.getContextPath()%>/getlanguagelist/' + v)
                     .then((response) => {
-                        // handle success
-                        // alert('come here');
-                        console.log(response);
-                        // this.desserts = response.data;
                         this.languages = response.data;
-                        // console.log("======start======'\n");
-                        // console.log(this.programmingLanguages);
-                        // console.log("==end==");
-                        // document.getElementById('app').style.visibility = 'visible';
                         this.searchAll();
                     })
                     .catch(function (error) {
@@ -785,29 +685,19 @@
             },
             querySelectionsSearchEmail(v) {
                 this.eloading = true;
-                // Simulated ajax query
-                // alert('val:'+v);
-                // alert('serch prog');
-
-
+                // console.log('--: ' + v);
                 axios.get('<%=request.getContextPath()%>/getemaillist/' + v)
                     .then((response) => {
-                        // handle success
-                        // alert('come here');
-                        // console.log(response);
-                        // this.desserts = response.data;
                         this.emails = response.data;
-                        // console.log("======start======'\n");
-                        // console.log(this.programmingLanguages);
-                        // console.log("==end==");
-                        // document.getElementById('app').style.visibility = 'visible';
                         this.searchAll();
                     })
                     .catch(function (error) {
                         // handle error
+                        // this.searchAll();
                         console.log(error);
                     })
                     .then(function () {
+                        // this.searchAll();
                         // always executed
                     });
 
@@ -820,51 +710,26 @@
                 }, 500)
             },
             updateSeek(event) {
-                // alert('called update');
             },
             nameWithLang({name, language}) {
                 return `${name} — [${language}]`
             },
             searchAll() {
-                console.log('!!searchall called!!');
                 var data = {
                     "email": this.selectEmail,
                     "code": this.selectLanguage,
                     "name": this.selectProgrammingLanguage
                 };
-                console.log(JSON.stringify(data));
-
-                var url1 = "workordergenerate";
                 axios.post('<%=request.getContextPath()%>/searchalldata', {data})
                     .then(result => {
-                        // alert('data from searchalldata!!');
-                        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                        console.log(result.data);
-                        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                         this.tableItems = result.data;
-
-
                     })
                     .catch(function (error) {
                     });
             },
             getAllDeveloper() {
-                // console.log('!!searchall called!!');
-                // var data = {
-                //     "email": this.selectEmail,
-                //     "code": this.selectLanguage,
-                //     "name": this.selectProgrammingLanguage
-                // };
-                // console.log(JSON.stringify(data));
-                //
-                // var url1 = "workordergenerate";
                 axios.get('<%=request.getContextPath()%>/getalldeveloper')
                     .then(result => {
-                        // alert('data from searchalldata!!');
-                        // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                        // console.log(result.data);
-                        // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                        // this.tableItems = result.data;
                         document.getElementById("json").innerHTML = JSON.stringify(result.data, undefined, 2);
 
 
@@ -949,55 +814,27 @@
                         protein: 7
                     }
                 ];
-                // alert('before get interview');
+
                 axios.get('<%=request.getContextPath()%>/getinterview')
                     .then((response) => {
                         this.desserts = response.data;
-                        console.log("======start interview data ======'\n");
-                        console.log(this.desserts);
-                        console.log("==end interview data==");
-                        // document.getElementById('app').style.visibility = 'visible';
-                        // this.searchAll();
                     })
                     .catch(function (error) {
-                        // handle error
                         console.log(error);
                     })
                     .then(function () {
-                        // always executed
+
                     });
-                // alert('after get interview');
 
             },
 
             editItem(item) {
                 this.editedIndex = this.desserts.indexOf(item);
                 this.editedItem = Object.assign({}, item);
-
-                // console.log('!!interview update called!!');
-                // var data = {
-                //     "id" : item.id,
-                //     "name" : item.name,
-                // };
-                // console.log(JSON.stringify(data));
-                //
-                // axios.post('/updateinterview', { "id" : item.id,
-                //     "name" : item.name,})
-                //     .then(result => {
-                //         this.initialize();
-                //
-                //     })
-                //     .catch(function (error) {
-                //     });
-
-
                 this.dialog = true
             },
 
             deleteItem(item) {
-                console.log('----------------- ITEM DELETE _-------------');
-                // console.log(item.id + ' --> ' + item.name);
-                // console.log('==============');
 
                 const index = this.desserts.indexOf(item);
                 if (confirm('Are you sure you want to delete this item?')) {
@@ -1005,15 +842,6 @@
 
                     axios.get('<%=request.getContextPath()%>/deleteinterview/' + item.id)
                         .then((response) => {
-                            // handle success
-                            // alert('come here');
-                            // console.log(response);
-                            // this.desserts = response.data;
-                            // this.emails = response.data;
-                            // console.log("======start======'\n");
-                            // console.log(this.programmingLanguages);
-                            // console.log("==end==");
-                            // document.getElementById('app').style.visibility = 'visible';
                             this.initialize();
                             // this.searchAll();
                         })
@@ -1039,15 +867,6 @@
 
             save() {
                 if (this.editedIndex > -1) {
-                    //probably create item
-                    // Object.assign(this.desserts[this.editedIndex], this.editedItem)
-                    console.log('!! inter view add called!!');
-                    // var data = {
-                    //     "id" : this.editedIndex,
-                    //     "name" : this.editedItem.name,
-                    // };
-                    // console.log(JSON.stringify(data));
-
                     axios.post('<%=request.getContextPath()%>/updateinterview', {
                         "id": this.editedItem.id,
                         "name": this.editedItem.name,
@@ -1063,7 +882,6 @@
                 } else {
                     console.log('!! inter view add called!!');
                     var data = {
-                        // "id" : item.id,
                         "name": this.editedItem,
                     };
                     console.log(JSON.stringify(data));
@@ -1083,87 +901,31 @@
             getAllData() {
                 axios.get('<%=request.getContextPath()%>/searchall')
                     .then((response) => {
-                        // handle success
-                        // alert('come here');
-                        console.log(response);
-                        // this.desserts = response.data;
                         this.tableItems = response.data;
-                        console.log("======start======'\n");
-                        console.log(this.desserts);
-                        console.log("==end==");
                         document.getElementById('app').style.visibility = 'visible';
                     })
                     .catch(function (error) {
-                        // handle error
+
                         console.log(error);
                     })
                     .then(function () {
-                        // always executed
                     });
             },
             getAllpna() {
                 axios.get('<%=request.getContextPath()%>/allpna')
                     .then((response) => {
-                        // handle success
-                        // alert('come here');
-                        console.log(response);
-                        // this.desserts = response.data;
                         this.tableItems = response.data;
-                        // console.log("======start======'\n");
-                        // console.log(this.desserts);
-                        // console.log("==end==");
-                        // document.getElementById('app').style.visibility = 'visible';
                     })
                     .catch(function (error) {
-                        // handle error
                         console.log(error);
                     })
                     .then(function () {
-                        // always executed
                     });
             },
-
-
-
 
         },
         updated: function () {
             this.$nextTick(function () {
-                // Code that will run only after the
-                // entire view has been re-rendered
-                // alert('called sometimes, - udated');
-                //
-                // if(this.selectProgrammingLanguage == this.searchProgrammingLanguage && this.selectProgrammingLanguage!=null ||
-                // this.selectEmail == this.searchEmail && this.selectEmail != null ||
-                // this.selectLanguage == this.searchLanguage && this.selectLanguage !=null
-                // ){
-                //     console.log('^^^^^^^^ success all criteria ^^^^^^^^^^^^!');
-                //     // alert('sucess all criteria!');
-                //     axios.get('/searchpl/'+this.selectProgrammingLanguage)
-                //         .then( (response) =>{
-                //             // handle success
-                //             // alert('come here');
-                //             console.log(response);
-                //             // this.desserts = response.data;
-                //             this.tableItems = response.data;
-                //             console.log("======start======'\n");
-                //             console.log(this.desserts);
-                //             console.log("==end==");
-                //             // alert('table value updated!!!!!!!!!! ');
-                //             // document.getElementById('app').style.visibility = 'visible';
-                //         })
-                //         .catch(function (error) {
-                //             // handle error
-                //             console.log(error);
-                //         })
-                //         .then(function () {
-                //             // always executed
-                //         });
-                //
-                // }
-
-                // this.searchAll();
-
             })
         },
         computed: {
@@ -1177,27 +939,19 @@
 
 
         mounted: function () {
-            // $('#app').css('visibility','visible');
             axios.get('<%=request.getContextPath()%>/searchall')
                 .then((response) => {
-                    // handle success
-                    // alert('come here');
                     console.log(response);
-                    // this.desserts = response.data;
                     this.tableItems = response.data;
-                    console.log("======start======'\n");
-                    console.log(this.desserts);
-                    console.log("==end==");
                     document.getElementById('app').style.visibility = 'visible';
 
                     this.getAllDeveloper();
                 })
                 .catch(function (error) {
-                    // handle error
+
                     console.log(error);
                 })
                 .then(function () {
-                    // always executed
                 });
 
 
